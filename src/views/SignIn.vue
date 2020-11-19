@@ -85,10 +85,7 @@
                         <v-btn
                           color="white"
                           class="elevation-5 primary--text mb-5"
-                          @click="
-                            step--;
-                            form.reset();
-                          "
+                          @click="step--"
                           >Iniciar sesión</v-btn
                         >
                       </div>
@@ -268,24 +265,26 @@ export default {
         email: this.email,
         hashedPassword: passwordHashed
       };
-
-      axios({
-        method: "GET",
-        headers: headersDatos,
-        url: "http://54.80.18.229:8123/api/Usuarios/GetByEmailAndPassword"
-      })
-        .then((response) => {
-          console.log(response);
-          if (response.data.Estado == "OK") {
-            this.$router.push("/estadisticas");
-          } else {
-            alert("E-mail o contraseña inválidos");
-          }
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        axios({
+          method: "GET",
+          headers: headersDatos,
+          url: "http://54.80.18.229:8123/api/Usuarios/GetByEmailAndPassword"
         })
+          .then((response) => {
+            console.log(response);
+            if (response.data.Estado == "OK") {
+              this.$router.push("/estadisticas");
+            } else {
+              alert("E-mail o contraseña inválidos");
+            }
+          })
 
-        .catch((error) => {
-          console.log(error);
-        });
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
 
     submitForm() {

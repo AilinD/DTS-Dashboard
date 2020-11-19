@@ -11,9 +11,9 @@
               <v-card class=" pa-3" outlined>
                 <v-card-text class="pt-0">
                   <div class="title font-weight mb-2">
-                    Cantidad de usuarios
+                    Cantidad de usuarios: {{ size(drivers) }}
                   </div>
-                  <div></div>
+
                   <v-divider class="my-2"></v-divider>
                 </v-card-text>
               </v-card>
@@ -47,7 +47,8 @@
                     :headers="headers"
                     :items="drivers"
                     :search="search"
-                  ></v-data-table>
+                  >
+                  </v-data-table>
                 </v-card>
               </v-card>
             </v-col>
@@ -112,6 +113,16 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  methods: {
+    size(drivers) {
+      let count = 0;
+      if (drivers != null) {
+        count = drivers.length;
+      }
+      return count;
+    }
   }
 };
 </script>

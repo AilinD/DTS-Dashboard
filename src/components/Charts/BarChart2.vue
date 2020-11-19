@@ -3,6 +3,9 @@ import { Bar } from "vue-chartjs";
 
 export default {
   extends: Bar,
+  props: {
+    chartInfo: Array
+  },
   data() {
     return {
       chartData: {
@@ -54,7 +57,7 @@ export default {
               "rgba(255, 159, 64, 1)"
             ],
             pointBorderColor: "#2554FF",
-            data: [53, 20, 10, 75, 30, 45, 53, 20, 10, 75, 30, 45]
+            data: []
           }
         ]
       },
@@ -87,7 +90,52 @@ export default {
     };
   },
   mounted() {
+    //console.log("Estoy en el mounted");
+    //console.log(this.chartInfo);
+    var cantidades = [];
+    this.chartInfo.forEach((info) => {
+      cantidades.push(info.cantidad);
+    });
+    this.chartData.datasets = [
+      {
+        barPercentage: 0.5,
+        barThickness: 50,
+        borderWidth: 1,
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)"
+        ],
+        borderColor: [
+          "rgba(255,99,132,1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(255,99,132,1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)"
+        ],
+        pointBorderColor: "#2554FF",
+        data: cantidades
+      }
+    ];
     this.renderChart(this.chartData, this.options);
+    //console.log("Estoy en el mounted");
+    //console.log(this.info);
   }
 };
 </script>
