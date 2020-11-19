@@ -22,12 +22,19 @@
             <v-card-title class="font-weight-black">
               {{ item.NombreConductor }} {{ calculate(item.Alarmas) }}
             </v-card-title>
+             <v-card-subtitle class="font-weight-bold"
+              >{{item.EmailConductor}} 
+            </v-card-subtitle>
             <v-card-subtitle class="font-weight-bold"
               >{{ item.EmailConductor }}
             </v-card-subtitle>
             <v-card-subtitle class="font-weight-bold "
               >Conduce:
             </v-card-subtitle>
+<<<<<<< HEAD
+=======
+            
+>>>>>>> 96edc0156caff1af2787e680e5c0ea8baac20dac
             <v-card-text class="font-weight-light">
               {{ item.NombreTipoVehiculo }}
             </v-card-text>
