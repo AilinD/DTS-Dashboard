@@ -1,9 +1,14 @@
-
-
-<template >
+<template>
   <v-container>
     <v-col>
-      <v-card elevation="1" shaped color="purple" min-width="100px">
+      <v-card
+        elevation="1"
+        shaped
+        color="primary"
+        min-width="100px"
+        class="pt-0"
+        height="55"
+      >
         <v-card-title class="white--text">
           Viajes activos: {{ size(infoData) }}
         </v-card-title>
@@ -11,25 +16,25 @@
     </v-col>
 
     <v-container fluid>
-      
       <v-row dense>
         <v-col cols="12" md="3" v-for="item in infoData" :key="item">
-          <v-card elevation="3" shaped min-height="">
+          <v-card elevation="3" min-height="" outlined class="mb-3">
             <v-card-title class="font-weight-black">
               {{ item.NombreConductor }} {{ calculate(item.Alarmas) }}
             </v-card-title>
             <v-card-subtitle class="font-weight-bold"
-              >Conduce :
+              >{{ item.EmailConductor }}
             </v-card-subtitle>
-
+            <v-card-subtitle class="font-weight-bold "
+              >Conduce:
+            </v-card-subtitle>
             <v-card-text class="font-weight-light">
               {{ item.NombreTipoVehiculo }}
             </v-card-text>
-
             <v-container>
               <v-row>
                 <v-col cols="6" md="6">
-                  <v-card elevation="1" shaped color="purple" min-width="70px">
+                  <v-card elevation="1" shaped color="primary" min-width="70px">
                     <v-card-subtitle class="white--text font-weight-medium">
                       Alertas
                     </v-card-subtitle>
@@ -129,8 +134,8 @@ export default {
       items: [
         { title: "Fatiga : ", pos: 1 },
         { title: "Distraccion : ", pos: 2 },
-        { title: "Velocidad : ", pos: 3 },
-      ],
+        { title: "Velocidad : ", pos: 3 }
+      ]
     };
   },
   mounted() {
@@ -170,13 +175,13 @@ export default {
     },
     submit() {
       const headersDatos = {
-        Authorization: "Basic UEYyMDIwOlBGMjAyMEFQSXYx",
+        Authorization: "Basic UEYyMDIwOlBGMjAyMEFQSXYx"
       };
 
       axios({
         method: "GET",
         headers: headersDatos,
-        url: "http://54.80.18.229:8123/api/Estadisticas/getEstadoActual",
+        url: "http://54.80.18.229:8123/api/Estadisticas/getEstadoActual"
       })
         .then((response) => {
           console.log(response);
@@ -186,8 +191,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-    },
-  },
+    }
+  }
 };
 </script>
-

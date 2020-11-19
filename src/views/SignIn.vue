@@ -16,6 +16,9 @@
                             class="ml-5 mr-5 mt-5"
                             label="Email"
                             v-model="email"
+                            :error-messages="emailErrors"
+                            @input="$v.email.$touch()"
+                            @blur="$v.email.$touch()"
                             prepend-icon="mdi-account-circle-outline"
                             type="text"
                           />
@@ -24,6 +27,9 @@
                             id="password"
                             label="Contraseña"
                             v-model="password"
+                            :error-messages="passwordLoginErrors"
+                            @input="$v.password.$touch()"
+                            @blur="$v.password.$touch()"
                             prepend-icon="mdi-lock-outline"
                             type="password"
                           />
@@ -79,7 +85,10 @@
                         <v-btn
                           color="white"
                           class="elevation-5 primary--text mb-5"
-                          @click="step--"
+                          @click="
+                            step--;
+                            form.reset();
+                          "
                           >Iniciar sesión</v-btn
                         >
                       </div>
@@ -92,6 +101,9 @@
                             class="ml-5 mr-5 mt-5"
                             label="Dirección de mail"
                             v-model="email"
+                            :error-messages="emailErrors"
+                            @input="$v.email.$touch()"
+                            @blur="$v.email.$touch()"
                             prepend-icon="mdi-email-outline"
                             type="text"
                           />
@@ -99,6 +111,9 @@
                             class="ml-5 mr-5 mt-1"
                             label="Nombre"
                             v-model="name"
+                            :error-messages="nameErrors"
+                            @input="$v.name.$touch()"
+                            @blur="$v.name.$touch()"
                             prepend-icon="mdi-account-circle-outline"
                             type="text"
                           />
@@ -107,14 +122,20 @@
                             id="password"
                             label="Contraseña"
                             v-model="password"
+                            :error-messages="passwordErrors"
+                            @input="$v.password.$touch()"
+                            @blur="$v.password.$touch()"
                             prepend-icon="mdi-lock-outline"
                             type="password"
                           />
                           <v-text-field
                             class="ml-5 mr-5 mt-1"
-                            id="password"
+                            id="password2"
                             label="Confirmar contraseña"
                             v-model="password2"
+                            :error-messages="password2Errors"
+                            @input="$v.password2.$touch()"
+                            @blur="$v.password2.$touch()"
                             prepend-icon="mdi-lock-outline"
                             type="password"
                           />
@@ -144,6 +165,7 @@
 <script>
 import axios from "axios";
 import CryptoJS from "crypto-js";
+import { required, sameAs, minLength, email } from "vuelidate/lib/validators";
 
 export default {
   data() {
@@ -153,8 +175,33 @@ export default {
       name: "",
       password: "",
       password2: "",
-      edit: true
+      edit: true,
+      submitStatus: null
     };
+  },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    name: {
+      required
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+      strongPassword(password) {
+        return (
+          /[a-z]/.test(password) &&
+          /[0-9]/.test(password) &&
+          /[A-Z]/.test(password)
+        );
+      }
+    },
+    password2: {
+      required,
+      sameAsPassword: sameAs("password")
+    }
   },
 
   computed: {
@@ -165,6 +212,49 @@ export default {
         case 2:
           return "Signup";
       }
+    },
+    nameErrors() {
+      const errors = [];
+      if (!this.$v.name.$dirty) return errors;
+      !this.$v.name.required && errors.push("El campo nombre es obligatorio.");
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("El e-mail debe ser valido");
+      !this.$v.email.required && errors.push("El campo e-mail es obligatorio.");
+      return errors;
+    },
+    passwordErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required &&
+        errors.push("El campo contraseña es obligatorio.");
+      !this.$v.password.minLength &&
+        errors.push("El campo contraseña debe tener al menos 8 caracteres");
+      !this.$v.password.strongPassword &&
+        errors.push(
+          "El campo contraseña debe tener al menos un número, una mayúscula y una minúscula"
+        );
+
+      return errors;
+    },
+    password2Errors() {
+      const errors = [];
+      if (!this.$v.password2.$dirty) return errors;
+      !this.$v.password2.required &&
+        errors.push("El campo contraseña es obligatorio.");
+      !this.$v.password2.sameAsPassword &&
+        errors.push("Las contraseñas deben coincidir.");
+      return errors;
+    },
+    passwordLoginErrors() {
+      const errors = [];
+      if (!this.$v.password.$dirty) return errors;
+      !this.$v.password.required &&
+        errors.push("El campo contrasena es obligatorio.");
+      return errors;
     }
   },
 
@@ -186,6 +276,11 @@ export default {
       })
         .then((response) => {
           console.log(response);
+          if (response.data.Estado == "OK") {
+            this.$router.push("/estadisticas");
+          } else {
+            alert("E-mail o contraseña inválidos");
+          }
         })
 
         .catch((error) => {
@@ -205,18 +300,39 @@ export default {
         puedeEditar: this.edit
       };
 
-      axios({
-        method: "POST",
-        headers: headersDatos,
-        url: "http://54.80.18.229:8123/api/Usuarios/Registrar"
-      })
-        .then((response) => {
-          console.log(response);
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = "ERROR";
+      } else {
+        axios({
+          method: "POST",
+          headers: headersDatos,
+          url: "http://54.80.18.229:8123/api/Usuarios/Registrar"
         })
+          .then((response) => {
+            console.log(response);
+            if (response.data.Estado == "OK") {
+              this.$router.push("/estadisticas");
+            }
+          })
 
-        .catch((error) => {
-          console.log(error);
-        });
+          .catch((error) => {
+            console.log(error);
+          });
+        this.submitStatus = "PENDING";
+        setTimeout(() => {
+          this.submitStatus = "OK";
+        }, 500);
+      }
+    },
+    clear() {
+      this.$v.$reset();
+      this.email = "";
+      this.name = "";
+      this.password = "";
+      this.password2 = "";
+
+      console.log("limpio");
     }
   }
 };
