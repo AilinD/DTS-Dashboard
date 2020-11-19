@@ -32,14 +32,12 @@
               size="18"
             ></v-rating>-->
 
-            {{ item.Scoring }}
+            {{ item.Scoring }}/5
           </div>
           <div class="text-center">
             {{ item.NombreConductor }}
           </div>
-          <div class="text-center">
-            {{ item.IdConductor }}
-          </div>
+          <div class="text-center">ID: {{ item.IdConductor }}</div>
           <div class="text-center">
             Cantidad de viajes: {{ item.CantidadViajes }}
           </div>
@@ -79,14 +77,12 @@
               size="18"
             ></v-rating>-->
 
-            {{ item.Scoring }}
+            {{ item.Scoring }}/5
           </div>
           <div class="text-center">
             {{ item.NombreConductor }}
           </div>
-          <div class="text-center">
-            {{ item.IdConductor }}
-          </div>
+          <div class="text-center">ID: {{ item.IdConductor }}</div>
           <div class="text-center">
             Cantidad de viajes: {{ item.CantidadViajes }}
           </div>
