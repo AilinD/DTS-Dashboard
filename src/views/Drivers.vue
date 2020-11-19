@@ -18,17 +18,6 @@
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col cols="sm" class="mt-3">
-              <v-card class=" pa-3" outlined>
-                <v-card-text class="pt-0">
-                  <div class="title font-weight mb-2">
-                    Mejores puntajes
-                  </div>
-                  <v-divider class="my-2 "></v-divider>
-                </v-card-text>
-                <div align="center"></div>
-              </v-card>
-            </v-col>
           </v-row>
           <v-row no-gutters>
             <v-col cols="sm">
@@ -107,7 +96,6 @@ export default {
     })
       .then((response) => {
         this.drivers = response.data.Datos;
-        console.log(response.data.Datos);
       })
 
       .catch((error) => {

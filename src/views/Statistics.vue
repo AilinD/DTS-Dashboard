@@ -33,9 +33,6 @@ export default {
     TopChart,
     Doughnut
   },
-  mounted() {
-    var registro = Date.now();
-    console.log(registro);
-  }
+  mounted() {}
 };
 </script>

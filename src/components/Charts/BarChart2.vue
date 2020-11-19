@@ -90,8 +90,6 @@ export default {
     };
   },
   mounted() {
-    //console.log("Estoy en el mounted");
-    //console.log(this.chartInfo);
     var cantidades = [];
     this.chartInfo.forEach((info) => {
       cantidades.push(info.cantidad);
@@ -134,8 +132,6 @@ export default {
       }
     ];
     this.renderChart(this.chartData, this.options);
-    //console.log("Estoy en el mounted");
-    //console.log(this.info);
   }
 };
 </script>

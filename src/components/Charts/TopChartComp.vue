@@ -13,7 +13,7 @@
       </v-container>
     </v-card-text>
     <v-container class="mt-0 pt-0">
-      <v-row align="center" class="pa-0">
+      <v-row align-self="center" class="pa-0 centre">
         <v-col
           cols="12"
           md="3"
@@ -140,7 +140,6 @@ export default {
         });
         mejores.sort();
         this.bestScores = mejores.slice(mejores.length - 3, mejores.length);
-        console.log(this.bestScores);
       });
     },
     onlyUnique(value, index, self) {
@@ -173,7 +172,6 @@ export default {
         });
         peores.sort();
         this.worstScores = peores.slice(0, 3);
-        console.log(this.worstScores);
       });
     },
     onlyUnique(value, index, self) {

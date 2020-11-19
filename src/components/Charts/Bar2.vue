@@ -68,20 +68,14 @@ export default {
           ids.push(alta.Viaje.Conductor.Id);
         });
         var uniqueids = ids.filter(this.onlyUnique);
-        //console.info(uniqueids);
 
         uniqueids.forEach((idConductoraBuscar) => {
-          // console.log("Muestro alta" + idConductoraBuscar);
           const conductor = response.data.Datos.find(
             (viaje) => viaje.Viaje.Conductor.Id == idConductoraBuscar
           );
-          /* console.log(
-           "Encontre al conductor" + conductor.Viaje.Conductor.AltaRegistro
-          );*/
           const mesAnio =
             conductor.Viaje.Conductor.AltaRegistro.slice(0, 4) +
             conductor.Viaje.Conductor.AltaRegistro.slice(5, 7);
-          //console.log("Muestro anio" + mesAnio);
 
           const posicion = this.altas.findIndex(
             (unAlta) => unAlta.mesAnio == mesAnio
@@ -92,7 +86,6 @@ export default {
             this.altas[posicion].cantidad++;
           }
         });
-        console.log(this.altas);
         this.mostrarChart = true;
       });
     },

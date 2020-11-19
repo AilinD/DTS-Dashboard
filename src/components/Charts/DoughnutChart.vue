@@ -31,8 +31,7 @@ export default {
       },
       options: {
         legend: {
-          display: true,
-          position: "right"
+          display: true
         },
         responsive: true,
         maintainAspectRatio: false

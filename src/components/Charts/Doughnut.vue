@@ -8,15 +8,6 @@
               Porcentaje de alertas
             </div>
           </v-col>
-          <v-col>
-            <v-row no-gutters class="mt-0">
-              <v-col>
-                <v-text-field type="date" v-model="dateFrom">
-                </v-text-field> </v-col
-              ><v-col>
-                <v-text-field type="date" v-model="dateTo">
-                </v-text-field> </v-col></v-row
-          ></v-col>
         </v-row>
         <v-divider class="mt-0 pt-0"></v-divider>
       </v-container>
@@ -63,20 +54,16 @@ export default {
         url: "http://54.80.18.229:8123/api/estadisticas/getDistribucionAlarmas"
       })
         .then((response) => {
-          // console.log(response.data.Datos);
           var porcFatiga = response.data.Datos[0].PorcentajeFatiga;
 
           var porcDist = response.data.Datos[0].PorcentajeDistraccion;
           var porcVelocidad = response.data.Datos[0].PorcentajeExcesoVelocidad;
 
           this.info = [porcFatiga, porcDist, porcVelocidad];
-          // console.log(this.info);
           this.mostrarChart = true;
         })
 
-        .catch((error) => {
-          //console.log(error);
-        });
+        .catch((error) => {});
     }
   }
 };

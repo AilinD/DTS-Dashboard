@@ -185,15 +185,9 @@ export default {
         method: "GET",
         headers: headersDatos,
         url: "http://54.80.18.229:8123/api/Estadisticas/getEstadoActual"
-      })
-        .then((response) => {
-          console.log(response);
-          this.infoData = response.data.Datos;
-        })
-
-        .catch((error) => {
-          console.log(error);
-        });
+      }).then((response) => {
+        this.infoData = response.data.Datos;
+      });
     }
   }
 };

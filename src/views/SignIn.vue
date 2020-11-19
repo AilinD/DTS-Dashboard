@@ -266,25 +266,24 @@ export default {
         hashedPassword: passwordHashed
       };
       this.$v.$touch();
-      if (!this.$v.$invalid) {
-        axios({
-          method: "GET",
-          headers: headersDatos,
-          url: "http://54.80.18.229:8123/api/Usuarios/GetByEmailAndPassword"
-        })
-          .then((response) => {
-            console.log(response);
-            if (response.data.Estado == "OK") {
-              this.$router.push("/estadisticas");
-            } else {
-              alert("E-mail o contraseña inválidos");
-            }
-          })
 
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      axios({
+        method: "GET",
+        headers: headersDatos,
+        url: "http://54.80.18.229:8123/api/Usuarios/GetByEmailAndPassword"
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.data.Estado == "OK") {
+            this.$router.push("/estadisticas");
+          } else {
+            alert("E-mail o contraseña inválidos");
+          }
+        })
+
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     submitForm() {
@@ -299,30 +298,21 @@ export default {
         puedeEditar: this.edit
       };
 
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        this.submitStatus = "ERROR";
-      } else {
-        axios({
-          method: "POST",
-          headers: headersDatos,
-          url: "http://54.80.18.229:8123/api/Usuarios/Registrar"
+      axios({
+        method: "POST",
+        headers: headersDatos,
+        url: "http://54.80.18.229:8123/api/Usuarios/Registrar"
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.data.Estado == "OK") {
+            this.$router.push("/estadisticas");
+          }
         })
-          .then((response) => {
-            console.log(response);
-            if (response.data.Estado == "OK") {
-              this.$router.push("/estadisticas");
-            }
-          })
 
-          .catch((error) => {
-            console.log(error);
-          });
-        this.submitStatus = "PENDING";
-        setTimeout(() => {
-          this.submitStatus = "OK";
-        }, 500);
-      }
+        .catch((error) => {
+          console.log(error);
+        });
     },
     clear() {
       this.$v.$reset();
