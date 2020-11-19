@@ -1,4 +1,4 @@
-# ui
+# Dashboard DTS
 
 ## Project setup
 ```
