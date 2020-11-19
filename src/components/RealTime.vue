@@ -18,10 +18,13 @@
             <v-card-title class="font-weight-black">
               {{ item.NombreConductor }} {{ calculate(item.Alarmas) }}
             </v-card-title>
+             <v-card-subtitle class="font-weight-bold"
+              >{{item.EmailConductor}} 
+            </v-card-subtitle>
             <v-card-subtitle class="font-weight-bold"
               >Conduce :
             </v-card-subtitle>
-
+            
             <v-card-text class="font-weight-light">
               {{ item.NombreTipoVehiculo }}
             </v-card-text>
