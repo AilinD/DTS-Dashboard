@@ -10,7 +10,12 @@
           <v-col cols="sm" class="mt-0 ">
             <Doughnut />
           </v-col>
-          <v-col cols="sm" class="mt-0 "> <top-chart /></v-col>
+          <v-col cols="sm" class="mt-0 ">
+            <top-chart />
+          </v-col>
+          <v-col cols="sm" class="mt-0 ">
+            <worst-chart />
+          </v-col>
         </v-container>
       </v-col>
     </v-row>
@@ -22,6 +27,7 @@ import Drawer from "../components/Drawer.vue";
 import Bar2 from "../components/Charts/Bar2.vue";
 import TopChart from "../components/Charts/TopChart.vue";
 import Doughnut from "../components/Charts/Doughnut.vue";
+import WorstChart from "../components/Charts/WorstChart.vue";
 import axios from "axios";
 export default {
   data() {
@@ -31,7 +37,8 @@ export default {
     Drawer,
     Bar2,
     TopChart,
-    Doughnut
+    Doughnut,
+    WorstChart
   },
   mounted() {}
 };

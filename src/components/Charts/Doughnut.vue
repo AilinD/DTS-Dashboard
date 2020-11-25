@@ -8,6 +8,11 @@
               Porcentaje de alertas
             </div>
           </v-col>
+          <v-col>
+            <div class="text-right mb-0">
+              Histórico
+            </div>
+          </v-col>
         </v-row>
         <v-divider class="mt-0 pt-0"></v-divider>
       </v-container>

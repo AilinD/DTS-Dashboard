@@ -2,9 +2,18 @@
   <v-card class=" container " outlined>
     <v-card-text class="pt-0">
       <v-container>
-        <div class="title font-weight mb-2">
-          Nuevos usuarios por mes
-        </div>
+        <v-row>
+          <v-col>
+            <div class="title font-weight mb-2">
+              Nuevos usuarios por mes
+            </div>
+          </v-col>
+          <v-col>
+            <div class="text-right mb-2">
+              2020
+            </div>
+          </v-col>
+        </v-row>
         <v-divider class="my-2"></v-divider>
       </v-container>
     </v-card-text>

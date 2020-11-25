@@ -308,6 +308,12 @@ export default {
           if (response.data.Estado == "OK") {
             this.$router.push("/estadisticas");
           }
+          if (
+            response.data.Detalle ==
+            "Valor duplicado: '" + this.email + "'"
+          ) {
+            alert("Email duplicado");
+          }
         })
 
         .catch((error) => {

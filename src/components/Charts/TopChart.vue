@@ -1,7 +1,5 @@
 <template>
-  <v-card class=" pa-3" outlined>
-    <top-chart-comp />
-  </v-card>
+  <top-chart-comp />
 </template>
 
 <script>
@@ -14,7 +12,7 @@ export default {
   data() {
     return {
       dateFrom: "20200801",
-      dateTo: "20201119"
+      dateTo: "20201130"
     };
   }
 };
