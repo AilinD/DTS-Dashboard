@@ -25,9 +25,6 @@
             <v-card-subtitle class="font-weight-bold"
               >{{ item.EmailConductor }}
             </v-card-subtitle>
-            <v-card-subtitle class="font-weight-bold"
-              >{{ item.EmailConductor }}
-            </v-card-subtitle>
             <v-card-subtitle class="font-weight-bold "
               >Conduce:
             </v-card-subtitle>
