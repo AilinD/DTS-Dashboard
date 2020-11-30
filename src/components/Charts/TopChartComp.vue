@@ -56,7 +56,7 @@ export default {
     return {
       bestScores: [],
       dateFrom: "20200801",
-      dateTo: "20201130"
+      dateTo: ""
     };
   },
   mounted() {
@@ -64,6 +64,11 @@ export default {
   },
   methods: {
     buscarmejores() {
+      var currentDateWithFormat = new Date()
+        .toJSON()
+        .slice(0, 10)
+        .replace(/-/g, "");
+      this.dateTo = currentDateWithFormat;
       const headersDatos = {
         Authorization: "Basic UEYyMDIwOlBGMjAyMEFQSXYx",
         FechaDesde: this.dateFrom,

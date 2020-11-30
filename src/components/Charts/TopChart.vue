@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       dateFrom: "20200801",
-      dateTo: "20201130"
+      dateTo: ""
     };
   }
 };

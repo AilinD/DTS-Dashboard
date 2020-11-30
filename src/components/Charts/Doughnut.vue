@@ -36,7 +36,7 @@ export default {
   },
   data: () => ({
     dateFrom: "20200801",
-    dateTo: "20201119",
+    dateTo: "",
     info: [],
     mostrarChart: false
   }),
@@ -47,6 +47,11 @@ export default {
 
   methods: {
     loadChart() {
+      var currentDateWithFormat = new Date()
+        .toJSON()
+        .slice(0, 10)
+        .replace(/-/g, "");
+      this.dateTo = currentDateWithFormat;
       const headersDatos = {
         Authorization: "Basic UEYyMDIwOlBGMjAyMEFQSXYx",
         FechaDesde: this.dateFrom,
